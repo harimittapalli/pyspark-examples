@@ -17,18 +17,18 @@ class SparkSessionBuilder:
             .getOrCreate()
         return spark_session
 
-    def csv_parser(self, spark_session, file_path="sample.csv"):
+    def csv_parser(self, spark_session, file_path="sample.csv", header=False):
 
-        df = spark_session.read.load(file_path, format="csv")
+        df = spark_session.read.load(file_path, format="csv", header=header)
         return df
 
-    def json_parser(self, spark_session, file_path="sample.json"):
+    def json_parser(self, spark_session, file_path="sample.json", header=False):
 
-        df = spark_session.read.load(file_path, format="json")
+        df = spark_session.read.load(file_path, format="json", header=header)
         return df
 
 
 if __name__ == "__main__":
     builder = SparkSessionBuilder()
     spark_session = builder.sessionbuilder(app_name="Builder")
-    df = builder.csv_parser(spark_session)
+    df = builder.csv_parser(spark_session, header=True)
